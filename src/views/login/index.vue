@@ -104,7 +104,11 @@ export default {
       this.$store.commit('user/setUserInfo', res.data)
       console.log(res)
       this.$toast('登陆成功')
-      this.$router.push('/')
+      // 进行判断，看地址栏有无会跳地址
+      // 如果有 => 说明是其他页面拦截到登录来的，需要回跳
+      // 如果没有 => 正常去首页
+      const url = this.$route.query.backUrl || '/'
+      this.$router.replace(url)
     }
   }
 }

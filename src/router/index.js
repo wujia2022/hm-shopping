@@ -5,6 +5,8 @@ import Login from '@/views/login'
 import Myorder from '@/views/myorder'
 import Pay from '@/views/pay'
 import Search from '@/views/search'
+import SearchList from '@/views/search/list'
+import ProDetail from '@/views/prodetail'
 import Home from '@/views/layout/home'
 import Cart from '@/views/layout/cart'
 import User from '@/views/layout/user'
@@ -17,6 +19,7 @@ const router = new VueRouter({
     {
       path: '/',
       component: Layout,
+      redirect: '/home',
       children: [
         { path: '/home', component: Home },
         { path: '/cart', component: Cart },
@@ -27,7 +30,15 @@ const router = new VueRouter({
     { path: '/login', component: Login },
     { path: '/myorder', component: Myorder },
     { path: '/pay', component: Pay },
-    { path: '/search', component: Search }
+    { path: '/search', component: Search },
+    {
+      path: '/searchlist',
+      component: SearchList
+    },
+    {
+      path: '/prodetail/:id',
+      component: ProDetail
+    }
   ]
 })
 // 所有的路由在真正被访问之前（解析渲染对应组件页面前），都会经过全局前置守卫

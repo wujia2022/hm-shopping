@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios from 'axios'
 import { Toast } from 'vant'
 // 创建axios实例， 将来对创建出来的实例，进行自定义配置
@@ -17,6 +18,12 @@ instance.interceptors.request.use(function (config) {
     loadingType: 'spinner',
     duration: 0 // 永不消失
   })
+  // 如果有token就在请求时携带，便于请求需要授权的接口
+  const token = store.getters.token
+  if (token) {
+    config.headers['Access-Token'] = token
+    config.headers.platform = 'H5'
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么
